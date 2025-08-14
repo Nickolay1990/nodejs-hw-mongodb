@@ -6,10 +6,18 @@ import {
   deleteContact,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
-import { checkValidData } from '../utils/validationSchemaFields.js';
+import { buildContactFiters } from '../utils/buildContactFiters.js';
 
 export const getContactsController = async (req, res) => {
-  const data = await getAllContacts();
+  const { page, perPage, sortBy, sortOrder } = req.validQuery;
+
+  const data = await getAllContacts(
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+    buildContactFiters(req.validQuery),
+  );
 
   res.status(200).json({
     status: 200,
@@ -34,14 +42,6 @@ export const getContactByIdController = async (req, res) => {
 };
 
 export const createContactController = async (req, res) => {
-  const { name, phoneNumber, contactType } = req.body;
-
-  if (!name || !phoneNumber || !contactType) {
-    throw createHttpError(400, 'Missing required fields');
-  }
-
-  checkValidData(req.body);
-
   const createdContact = await createContact(req.body);
   res.status(201).json({
     status: 201,
@@ -53,8 +53,6 @@ export const createContactController = async (req, res) => {
 export const updateContactController = async (req, res) => {
   const { contactId } = req.params;
   const payload = req.body;
-
-  checkValidData(req.body);
 
   const updatedContact = await updateContact(contactId, payload);
 
