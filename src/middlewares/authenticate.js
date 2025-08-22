@@ -34,7 +34,5 @@ export const authenticate = async (req, res, next) => {
 
   req.user = user;
 
-  console.log('11111');
-
   next();
 };

@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 import { CONTACT_TYPES } from '../../constants/contactTypes.js';
 
 export const contactSchema = new Schema(
@@ -23,6 +23,10 @@ export const contactSchema = new Schema(
       enum: CONTACT_TYPES,
       required: true,
       default: 'personal',
+    },
+    userId: {
+      required: true,
+      type: Types.ObjectId,
     },
   },
   {

@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-// import pino from 'pino-http';
+import pino from 'pino-http';
 import cors from 'cors';
 import 'dotenv/config';
 import { getEnvVar } from './utils/getEnvVar.js';
@@ -11,13 +11,13 @@ import cookieParser from 'cookie-parser';
 export const setupServer = () => {
   const app = express();
   const PORT = Number(getEnvVar('PORT', 3000));
-  // app.use(
-  //   pino({
-  //     transport: {
-  //       target: 'pino-pretty',
-  //     },
-  //   }),
-  // );
+  app.use(
+    pino({
+      transport: {
+        target: 'pino-pretty',
+      },
+    }),
+  );
 
   app.use(cors());
 
