@@ -12,30 +12,29 @@ import { updateContactsValidationSchema } from '../validation/UpdateContact.js';
 import { validateId } from '../middlewares/validateId.js';
 import { validateParams } from '../middlewares/validateParams.js';
 import { paramsValidationSchema } from '../validation/paramsValidation.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
-router.get(
-  '/contacts',
-  validateParams(paramsValidationSchema),
-  getContactsController,
-);
+router.use(authenticate);
 
-router.get('/contacts/:contactId', validateId, getContactByIdController);
+router.get('/', validateParams(paramsValidationSchema), getContactsController);
+
+router.get('/:contactId', validateId, getContactByIdController);
 
 router.post(
-  '/contacts',
+  '/',
   validateBody(createContactsValidationSchema),
   createContactController,
 );
 
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
   validateId,
   validateBody(updateContactsValidationSchema),
   updateContactController,
 );
 
-router.delete('/contacts/:contactId', validateId, deleteContactController);
+router.delete('/:contactId', validateId, deleteContactController);
 
 export default router;
