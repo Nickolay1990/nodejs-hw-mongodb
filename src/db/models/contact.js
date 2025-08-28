@@ -28,6 +28,11 @@ export const contactSchema = new Schema(
       required: true,
       type: Types.ObjectId,
     },
+    photo: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
   {
     timestamps: true,
