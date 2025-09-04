@@ -1,0 +1,52 @@
+description: Validation error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 422
+        message:
+          type: array
+          items:
+            type: object
+            required:
+              - message
+              - path
+              - type
+              - context
+            properties:
+              message:
+                type: string
+                example: '"UNKNOWN" is not allowed'
+              path:
+                type: array
+                items:
+                  type: string
+                  example: [UNKNOWN]
+              type:
+                type: string
+                example: object.unknown
+              context:
+                type: object
+                properties:
+                  child:
+                    type: string
+                    example: UNKNOWN
+                  label:
+                    type: string
+                    example: UNKNOWN
+                  value:
+                    type: string
+                    example: UNKNOWN
+                  key:
+                    type: string
+                    example: UNKNOWN
+        data:
+          type: string
+          example: Bad Request

@@ -1,0 +1,19 @@
+description: Check authorization header
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Something went wrong
+        data:
+          type: string
+          example: Please provide Authorization header

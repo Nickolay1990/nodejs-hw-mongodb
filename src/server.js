@@ -7,6 +7,7 @@ import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 export const setupServer = () => {
   const app = express();
@@ -24,6 +25,7 @@ export const setupServer = () => {
   app.use(json());
 
   app.use(cookieParser());
+  app.use('/api-docs', swaggerDocs());
 
   app.get('/', (req, res) => {
     res.status(200).json({ message: 'ok!' });

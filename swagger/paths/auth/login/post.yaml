@@ -1,0 +1,31 @@
+tags:
+  - Auth
+summary: Login user
+operationId: loginUser
+description: Login user with payload
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: User's email
+            type: string
+            example: jon.doe@mail.com
+          password:
+            description: User's password
+            type: string
+            example: password*******
+responses:
+  '200':
+    $ref: ../../../components/responses/auth/200auth.yaml
+  '401':
+    $ref: ../../../components/responses/auth/401auth.yaml
+  '422':
+    $ref: ../../../components/responses/422.yaml

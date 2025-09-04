@@ -1,0 +1,33 @@
+description: Create a user
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: Successfully registered a user!
+        data:
+          type: object
+          required:
+            - name
+            - email
+            - _id
+          properties:
+            name:
+              type: string
+              example: kioew
+            email:
+              type: string
+              example: 1111@111.com
+            _id:
+              type: string
+              format: objectId
+              example: 68b981344eabecf1ddc7d286
